@@ -3,6 +3,10 @@ CC=gcc
 .PHONY: all
 all: dlopen_test
 
+.PHONY: run
+run:
+	./a.out
+
 .PHONY: shared
 shared:
 	$(CC) -o lib.so -shared -fPIC lib.c

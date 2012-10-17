@@ -3,10 +3,14 @@ CC=gcc
 .PHONY: all
 all: dlopen_test
 
-
 .PHONY: run
 run:
 	./a.out
+
+.PHONE: preload_test
+preload_test:
+	$(CC) -o a.out write_hook_test.c
+	$(CC) -shared -o write_hook.so write_hook.c -fPIC
 
 .PHONY: shared
 shared:

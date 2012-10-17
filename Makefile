@@ -7,18 +7,18 @@ all: dlopen_test
 run:
 	./a.out
 
-.PHONE: preload_test
-preload_test:
-	$(CC) -o a.out write_hook_test.c
-	$(CC) -shared -o write_hook.so write_hook.c -fPIC
+.PHONE: preload
+preload:
+	$(CC) -o write_hook.so -shared -fPIC write_hook.c -ldl
+	$(CC) -o a.out -fPIC -ldl write_hook_test.c
+
+.PHONY: dlopen
+dlopen: shared
+	$(CC) -o a.out dlopen_test.c -ldl
 
 .PHONY: shared
 shared:
 	$(CC) -o lib.so -shared -fPIC lib.c
-
-.PHONY: dlopen_test
-dlopen_test: shared
-	$(CC) -o a.out dlopen_test.c -ldl
 
 .PHONY: simple
 simple:

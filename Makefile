@@ -3,6 +3,7 @@ CC=gcc
 .PHONY: all
 all: dlopen_test
 
+
 .PHONY: run
 run:
 	./a.out
